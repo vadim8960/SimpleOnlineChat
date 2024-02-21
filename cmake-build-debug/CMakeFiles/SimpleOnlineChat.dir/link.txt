@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/SimpleOnlineChat.dir/src/App.cpp.o CMakeFiles/SimpleOnlineChat.dir/src/main.cpp.o -o SimpleOnlineChat 
