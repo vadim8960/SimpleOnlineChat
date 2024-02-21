@@ -3,3 +3,15 @@
 //
 
 #include "App.hpp"
+
+namespace soc {
+
+App::App(int argc, char **argv) {
+
+}
+
+int App::process() {
+	return 0;
+}
+
+}

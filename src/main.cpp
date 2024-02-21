@@ -2,7 +2,9 @@
 // Created by vadim on 22.02.24.
 //
 
-int main(int argc, char **argv) {
+#include "App.hpp"
 
-	return 0;
+int main(int argc, char **argv) {
+	soc::App app(argc, argv);
+	return app.process();
 }
