@@ -1,3 +1,0 @@
-/home/vadim/programs/cpp/SimpleOnlineChat/cmake-build-debug/CMakeFiles/SimpleOnlineChat.dir
-/home/vadim/programs/cpp/SimpleOnlineChat/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/vadim/programs/cpp/SimpleOnlineChat/cmake-build-debug/CMakeFiles/rebuild_cache.dir
