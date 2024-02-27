@@ -20,29 +20,8 @@ class session : public std::enable_shared_from_this<session> {
 public:
 	session(tcp::socket&& socket) : socket_(std::move(socket)) {}
 
-	void async_read() {
-		io::async_read_until(socket_, streambuff_in_, '\n',
-							 [self = shared_from_this()](const boost::system::error_code& err,
-														 std::size_t bytes_transferred) {
-							   if (bytes_transferred) {
-								   io::streambuf::const_buffers_type tmp = self->streambuff_in_.data();
-								   std::string to{io::buffers_begin(tmp),
-												  io::buffers_begin(tmp) + bytes_transferred};
-								   self->async_write(to);
-								   self->streambuff_in_.consume(bytes_transferred);
-							   }
-							 });
-	}
-
-	void async_write(const std::string& data) {
-		std::iostream out(&streambuff_out_);
-		out << socket_.remote_endpoint() << " says: " << data;
-		io::async_write(socket_, streambuff_out_,
-						[self = shared_from_this()](const boost::system::error_code& err,
-													std::size_t bytes_transferred) {
-						  self->streambuff_out_.consume(bytes_transferred);
-						  self->async_read();
-						});
+	void start() {
+		
 	}
 
 private:
@@ -61,7 +40,7 @@ public:
 		socket_.emplace(io_context_);
 
 		acceptor_.async_accept(*socket_, [&](boost::system::error_code error) {
-		  std::make_shared<session>(std::move(*socket_))->async_read();
+		  std::make_shared<session>(std::move(*socket_))->start();
 		  async_accept();
 		});
 	}
