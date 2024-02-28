@@ -5,6 +5,8 @@
 #ifndef SIMPLEONLINECHAT_APP_HPP
 #define SIMPLEONLINECHAT_APP_HPP
 
+#include "network/Server.hpp"
+
 namespace soc {
 
 class App {
@@ -15,7 +17,7 @@ public:
 	int process();
 
 private:
-
+	network::Server server_;
 };
 
 }

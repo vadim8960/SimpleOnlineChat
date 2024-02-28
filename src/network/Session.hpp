@@ -25,7 +25,10 @@ public:
 	void start();
 	void sendMsg(std::string_view msg);
 
+	void stop();
+
 	const tcp::socket& getSocket() const;
+	tcp::socket& getSocket();
 
 private:
 	void onAsyncReadComplete_(const boost::system::error_code& error, std::size_t bytes_transmitted);

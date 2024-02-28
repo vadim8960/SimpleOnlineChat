@@ -4,17 +4,18 @@
 
 #include "Session.hpp"
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
+#include <iostream>
 
 namespace soc::network {
 
-using namespace std::placeholders;
-
 Session::Session(io::io_context& io_context) : socket_(io_context) {
-	client_endpoint_ = socket_.remote_endpoint();
+//	client_endpoint_ = socket_.remote_endpoint();
 }
 
 void Session::start() {
+	std::cout << "Session start\n";
+	return;
 	io::async_read_until(socket_,
 						 streambuff_,
 						 '\n',
@@ -35,7 +36,15 @@ void Session::sendMsg(std::string_view msg) {
 								io::placeholders::bytes_transferred()));
 }
 
+void Session::stop() {
+	socket_.close();
+}
+
 const tcp::socket& Session::getSocket() const {
+	return socket_;
+}
+
+tcp::socket& Session::getSocket() {
 	return socket_;
 }
 

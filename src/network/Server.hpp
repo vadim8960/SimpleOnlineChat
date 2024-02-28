@@ -20,10 +20,17 @@ public:
 
 	void run();
 
+	~Server();
+
 private:
-	std::unordered_set<Session *> opened_sessions_;
+	void asyncAccept();
+	void onAcceptSuccess(std::shared_ptr<Session> session, const boost::system::error_code& error);
+
+private:
+	std::unordered_set<std::shared_ptr<Session>> opened_sessions_;
 
 	io::io_context io_context_;
+	tcp::endpoint endpoint_;
 	tcp::acceptor acceptor_;
 };
 
